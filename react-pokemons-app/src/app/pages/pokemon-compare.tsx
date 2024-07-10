@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import PokemonCardDetails from "../components/pokemon-card-details";
-import { Pokemon } from "../models/pokemon";
-import { getPokemon } from "../services/pokemon-service";
+import { useEffect, useState } from 'react';
+import PokemonCardDetails from '../components/pokemon-card-details';
+import { Pokemon } from '../models/pokemon';
+import { getPokemon } from '../services/pokemon-service';
 
 function PokemonCompare() {
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
@@ -16,14 +16,21 @@ function PokemonCompare() {
   // }, []);
 
   useEffect(() => {
-    Promise.all([
-      getPokemon(Number(1)),
-      getPokemon(Number(2))
-    ]).then(([pokemon1, pokemon2]) => {
-      setPokemon1(pokemon1)
-      setPokemon2(pokemon2)
-    })
-  }, [])
+    Promise.all([getPokemon(Number(1)), getPokemon(Number(2))]).then(
+      ([pokemon1, pokemon2]) => {
+        setPokemon1(pokemon1);
+        setPokemon2(pokemon2);
+      }
+    );
+    // (async () => {
+    //   const [pokemon1, pokemon2] = await Promise.all([
+    //     getPokemon(Number(1)),
+    //     getPokemon(Number(2))
+    //   ]);
+    //   setPokemon1(pokemon1);
+    //   setPokemon2(pokemon2);
+    // })()
+  }, []);
 
   return (
     <div className="row">

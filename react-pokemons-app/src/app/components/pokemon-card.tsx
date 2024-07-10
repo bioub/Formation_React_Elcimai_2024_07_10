@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
+import { MouseEvent } from 'react';
 
 type Props = {
   pokemon: Pokemon;
@@ -13,6 +14,11 @@ function PokemonCard({ pokemon }: Props) {
 
   function goToPokemon(id: number) {
     navigate(`/pokemons/${id}`);
+  }
+
+  function handleClick(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    goToPokemon(pokemon.id ?? 0)
   }
 
   return (
@@ -32,7 +38,7 @@ function PokemonCard({ pokemon }: Props) {
                 {type}
               </span>
             ))}
-            <button onClick={() => goToPokemon(pokemon.id ?? 0)}>Details</button>
+            <button onClick={handleClick}>Details</button>
           </div>
         </div>
       </div>
