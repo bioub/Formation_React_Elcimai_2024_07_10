@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { login } from '../services/authentication-service';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type Field = {
   value?: any;
@@ -13,7 +14,11 @@ type Form = {
   password: Field;
 };
 
+// t('login.messages.wrongCredentials')
+// t('login.messages.loading')
+
 function Login() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [form, setForm] = useState<Form>({
@@ -82,11 +87,11 @@ function Login() {
     event.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      setMessage('👉 Tentative de connexion en cours ...');
+      setMessage('login.messages.loading');
       login(form.username.value, form.password.value).then(
         (isAuthenticated) => {
           if (!isAuthenticated) {
-            setMessage('🔐 Identifiant ou mot de passe incorrect.');
+            setMessage('login.messages.wrongCredentials');
             return;
           }
 
@@ -106,12 +111,12 @@ function Login() {
                 {/* Form message */}
                 {message && (
                   <div className="form-group">
-                    <div className="card-panel grey lighten-5">{message}</div>
+                    <div className="card-panel grey lighten-5">{t(message)}</div>
                   </div>
                 )}
                 {/* Field username */}
                 <div className="form-group">
-                  <label htmlFor="username">Identifiant</label>
+                  <label htmlFor="username">{t('login.username')}</label>
                   <input
                     id="username"
                     type="text"

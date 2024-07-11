@@ -7,16 +7,21 @@ import PageNotFound from './pages/page-not-found';
 import Login from './pages/login';
 import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t, i18n } = useTranslation();
+
   return (
     <BrowserRouter>
       <div>
         <nav>
           <div className="nav-wrapper teal">
             <Link to="/" className="brand-logo center">
-              Pokédex
+              {t('Pokédex')}
             </Link>
+            <button onClick={() => { i18n.changeLanguage('en') }}>en</button>
+            <button onClick={() => { i18n.changeLanguage('fr') }}>fr</button>
           </div>
         </nav>
         <Routes>

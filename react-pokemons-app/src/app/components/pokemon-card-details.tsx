@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import { formatDate, formatType } from '../helpers';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   pokemon?: Pokemon;
 };
 
 function PokemonCardDetails({ pokemon }: Readonly<Props>) {
+  const { t } = useTranslation('pokemons');
+
   if (!pokemon) {
     return null;
   }
@@ -33,25 +36,25 @@ function PokemonCardDetails({ pokemon }: Readonly<Props>) {
             <table className="bordered striped">
               <tbody>
                 <tr>
-                  <td>Nom</td>
+                  <td>{t('pokemonCardDetails.name')}</td>
                   <td>
                     <strong>{pokemon.name}</strong>
                   </td>
                 </tr>
                 <tr>
-                  <td>Points de vie</td>
+                  <td>{t('pokemonCardDetails.healthpoints')}</td>
                   <td>
                     <strong>{pokemon.hp}</strong>
                   </td>
                 </tr>
                 <tr>
-                  <td>Dégâts</td>
+                  <td>{t('pokemonCardDetails.damage')}</td>
                   <td>
                     <strong>{pokemon.cp}</strong>
                   </td>
                 </tr>
                 <tr>
-                  <td>Types</td>
+                  <td>{t('pokemonCardDetails.types')}</td>
                   <td>
                     {pokemon.types?.map((type) => (
                       <span key={type} className={formatType(type)}>
@@ -61,14 +64,14 @@ function PokemonCardDetails({ pokemon }: Readonly<Props>) {
                   </td>
                 </tr>
                 <tr>
-                  <td>Date de création</td>
+                  <td>{t('pokemonCardDetails.createdAt')}</td>
                   <td>{formatDate(pokemon.created)}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div className="card-action">
-            <Link to="/">Retour</Link>
+            <Link to="/">{t('pokemonCardDetails.back')}</Link>
           </div>
         </div>
       </div>

@@ -5,13 +5,28 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import List from '../components/list';
 
-function PokemonList() {
+function useApiPokemons() {
+  const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    getPokemons().then((pokemons) => setPokemons(pokemons));
+    setLoading(true);
+    getPokemons().then((pokemons) => {
+      setPokemons(pokemons)
+      setLoading(false);
+    });
   }, []);
+
+  return {
+    pokemons,
+    loading
+  }
+}
+
+function PokemonList() {
+  const { pokemons, loading } = useApiPokemons();
 
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
@@ -23,9 +38,10 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch />
-          {pokemons.map((pokemon) => (
+          <List items={pokemons} renderItem={(pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />}></List>
+          {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
+          ))} */}
         </div>
       </div>
       <Link
