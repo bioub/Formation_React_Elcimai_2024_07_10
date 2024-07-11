@@ -24,11 +24,15 @@ const Select = forwardRef<SelectRefApi, Props>(function Select({ items, value, o
   }))
 
   useEffect(() => {
-    window.addEventListener('click', (event) => {
+    const callback = (event: MouseEvent) => {
       if (!divRef.current?.contains(event.target as HTMLElement)) {
         setShowMenu(false);
       }
-    }, { capture: true })
+    };
+    window.addEventListener('click', callback, { capture: true })
+    return () => {
+      window.removeEventListener('click', callback, { capture: true })
+    }
   }, []);
 
   return (

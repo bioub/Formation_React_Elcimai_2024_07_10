@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, memo, useMemo, useCallback } from 'react';
 import { Pokemon } from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
 import { getPokemons } from '../services/pokemon-service';
@@ -28,8 +28,19 @@ function useApiPokemons() {
 }
 
 function PokemonList() {
+
+  const [term, setTerm] = useState('');
   const { pokemonsIdsToCompare } = useContext(CompareContext);
   const { pokemons, loading } = useApiPokemons();
+
+  // const renderItemMemo = useMemo(() => (pokemon: Pokemon) => (
+  //   <PokemonCard key={pokemon.id} pokemon={pokemon} />
+  // ), []);
+
+  // en raccourci
+  const renderItemMemo = useCallback((pokemon: Pokemon) => (
+    <PokemonCard key={pokemon.id} pokemon={pokemon} />
+  ), []);
 
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
@@ -40,12 +51,10 @@ function PokemonList() {
       <h1 className="center">Pokédex</h1>
       <div className="container">
         <div className="row">
-          <PokemonSearch />
+          <PokemonSearch filter={term} onType={setTerm} />
           <List
             items={pokemons}
-            renderItem={(pokemon) => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
-            )}
+            renderItem={renderItemMemo}
           ></List>
           {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />

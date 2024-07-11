@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
-import { MouseEvent, useContext } from 'react';
+import { memo, MouseEvent, useContext } from 'react';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
 
@@ -14,6 +14,13 @@ type Props = {
 function PokemonCard({ pokemon }: Props) {
   const { pokemonsIdsToCompare, toggleSelectId } = useContext(CompareContext);
   const navigate = useNavigate();
+
+  // ABSURDE bloque le thread pendant 200ms (simule
+  // un traitement synchrone très long)
+  // si vraiment pas possible de faire autrement
+  // -> Web Worker
+  const debut = Date.now();
+  while (debut + 200 > Date.now());
 
   function goToPokemon(id: number) {
     navigate(`/pokemons/${id}`);
