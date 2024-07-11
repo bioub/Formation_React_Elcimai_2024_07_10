@@ -2,7 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
-import { MouseEvent } from 'react';
+import { MouseEvent, useContext } from 'react';
+import { CompareContext } from '../compare-context';
+import classNames from 'classnames';
 
 type Props = {
   pokemon: Pokemon;
@@ -10,6 +12,7 @@ type Props = {
 };
 
 function PokemonCard({ pokemon }: Props) {
+  const { pokemonsIdsToCompare, toggleSelectId } = useContext(CompareContext);
   const navigate = useNavigate();
 
   function goToPokemon(id: number) {
@@ -22,7 +25,7 @@ function PokemonCard({ pokemon }: Props) {
   }
 
   return (
-    <div className="col s6 m4">
+    <div className={classNames("col s6 m4", {'blue': pokemonsIdsToCompare.includes(pokemon.id!)})} onClick={() => { toggleSelectId(pokemon.id!) }}>
       <div className="card horizontal">
         <div className="card-image">
           <img src={pokemon.picture} alt={pokemon.name} />

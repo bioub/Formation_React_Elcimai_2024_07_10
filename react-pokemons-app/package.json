@@ -13,6 +13,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "classnames": "^2.5.1",
     "i18next": "^23.11.5",
     "i18next-http-backend": "^2.5.2",
     "react": "18.2.0",

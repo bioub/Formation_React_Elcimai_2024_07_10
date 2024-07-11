@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PokemonCardDetails from '../components/pokemon-card-details';
 import { Pokemon } from '../models/pokemon';
 import { getPokemon } from '../services/pokemon-service';
+import { CompareContext } from '../compare-context';
+import { useNavigate } from 'react-router-dom';
 
 function PokemonCompare() {
+  const navigate = useNavigate();
+  const { pokemonsIdsToCompare } = useContext(CompareContext);
+
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
   const [pokemon2, setPokemon2] = useState<Pokemon | undefined>();
 
@@ -16,7 +21,7 @@ function PokemonCompare() {
   // }, []);
 
   useEffect(() => {
-    Promise.all([getPokemon(Number(1)), getPokemon(Number(2))]).then(
+    Promise.all([getPokemon(pokemonsIdsToCompare[0]), getPokemon(pokemonsIdsToCompare[1])]).then(
       ([pokemon1, pokemon2]) => {
         setPokemon1(pokemon1);
         setPokemon2(pokemon2);
@@ -31,6 +36,10 @@ function PokemonCompare() {
     //   setPokemon2(pokemon2);
     // })()
   }, []);
+
+  if (pokemonsIdsToCompare.length < 2) {
+    return navigate('/pokemons')
+  }
 
   return (
     <div className="row">

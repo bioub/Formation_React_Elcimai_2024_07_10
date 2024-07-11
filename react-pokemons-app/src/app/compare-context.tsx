@@ -19,7 +19,13 @@ type CompareProviderProps = {
 export function CompareProvider({ children }: Readonly<CompareProviderProps>) {
   const [pokemonsIdsToCompare, setPokemonsIdsToCompare] = useState<number[]>([]);
 
-  function toggleSelectId(id: number) { /* finir d'écrire cette fonction et appeler useContext dans PokemonCard et PokemonCompare */}
+  function toggleSelectId(id: number) { 
+    if (pokemonsIdsToCompare.includes(id)) {
+      setPokemonsIdsToCompare(pokemonsIdsToCompare.filter((pokemonId) => pokemonId !== id));
+    } else if (pokemonsIdsToCompare.length < 2) {
+      setPokemonsIdsToCompare([...pokemonsIdsToCompare, id]);
+    }
+  }
 
   return <CompareContext.Provider value={{pokemonsIdsToCompare, toggleSelectId}}>{children}</CompareContext.Provider>;
 }

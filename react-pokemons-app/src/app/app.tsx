@@ -9,24 +9,38 @@ import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
 import { useTranslation } from 'react-i18next';
 import { Suspense } from 'react';
+import { CompareProvider } from './compare-context';
 
 function App() {
   const { t, i18n } = useTranslation();
 
   return (
-    <BrowserRouter>
-      <div>
-        <nav>
-          <div className="nav-wrapper teal">
-            <Link to="/" className="brand-logo center">
-              {t('Pokédex')}
-            </Link>
-            <button onClick={() => { i18n.changeLanguage('en') }}>en</button>
-            <button onClick={() => { i18n.changeLanguage('fr') }}>fr</button>
-          </div>
-        </nav>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Routes>
+    <CompareProvider>
+      <BrowserRouter>
+        <div>
+          <nav>
+            <div className="nav-wrapper teal">
+              <Link to="/" className="brand-logo center">
+                {t('Pokédex')}
+              </Link>
+              <button
+                onClick={() => {
+                  i18n.changeLanguage('en');
+                }}
+              >
+                en
+              </button>
+              <button
+                onClick={() => {
+                  i18n.changeLanguage('fr');
+                }}
+              >
+                fr
+              </button>
+            </div>
+          </nav>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Routes>
               <Route index path="/" element={<PokemonsList />} />
               <Route path="/login" element={<Login />} />
               <Route element={<PrivateRoute />}>
@@ -38,9 +52,10 @@ function App() {
               </Route>
               <Route element={<PageNotFound />} />
             </Routes>
-        </Suspense>
-      </div>
-    </BrowserRouter>
+          </Suspense>
+        </div>
+      </BrowserRouter>
+    </CompareProvider>
   );
 }
 
