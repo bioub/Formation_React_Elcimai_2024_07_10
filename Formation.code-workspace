@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "hello-react",
+			"path": "hello-react"
+		},
+		{
+			"name": "react-pokemons-app",
+			"path": "react-pokemons-app"
+		}
+	],
+	"settings": {}
+}
