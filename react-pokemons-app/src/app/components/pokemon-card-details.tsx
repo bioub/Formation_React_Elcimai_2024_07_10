@@ -8,6 +8,7 @@ type Props = {
 };
 
 function PokemonCardDetails({ pokemon }: Readonly<Props>) {
+
   const { t } = useTranslation('pokemons');
 
   if (!pokemon) {

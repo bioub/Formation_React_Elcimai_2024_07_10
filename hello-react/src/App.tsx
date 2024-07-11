@@ -35,7 +35,7 @@ function App() {
       <Select
         items={['Toto', 'Titi', 'Tata']}
         value={name}
-        onValueChange={(v) => setName(v)}
+        onValueChange={setName}
         ref={selectRef}
       />
     </>

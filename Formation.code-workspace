@@ -7,6 +7,9 @@
 		{
 			"name": "react-pokemons-app",
 			"path": "react-pokemons-app"
+		},
+		{
+			"path": "react-communication"
 		}
 	],
 	"settings": {}
