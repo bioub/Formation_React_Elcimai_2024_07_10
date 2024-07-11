@@ -1,13 +1,19 @@
-import './Select.css';
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import classNames from 'classnames';
+import styles from './Select.module.css';
+import { forwardRef, ReactNode, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 type Props = {
   items: string[];
   value: string;
   onValueChange(val: string): void;
+  renderItem?(val: string): ReactNode;
 };
 
-const Select = forwardRef(function Select({ items, value, onValueChange }: Props, ref) {
+export type SelectRefApi = {
+  openMenu(): void;
+}
+
+const Select = forwardRef<SelectRefApi, Props>(function Select({ items, value, onValueChange, renderItem }: Props, ref) {
   const [showMenu, setShowMenu] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -27,16 +33,16 @@ const Select = forwardRef(function Select({ items, value, onValueChange }: Props
 
   return (
     <div ref={divRef} className="Select" onClick={() => setShowMenu(!showMenu)}>
-      <div className="selected">{value}</div>
+      <div className={styles.selected}>{value}</div>
       {showMenu && (
-        <div className="menu">
+        <div className={styles.menu}>
           {items.map((item) => (
             <div
               key={item}
-              className="item"
+              className={classNames(styles.item, { [styles.active]: item === value })}
               onClick={() => onValueChange(item)}
             >
-              {item}
+              {renderItem ? renderItem(item) : item}
             </div>
           ))}
         </div>

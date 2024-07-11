@@ -10,3 +10,7 @@
 .item {
   padding: 5px;
 }
+
+.active {
+  background-color: lightblue;
+}
