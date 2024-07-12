@@ -9,15 +9,22 @@ import List from '../components/list';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestPokemons, requestPokemonsSuccess } from '../store/pokemonsSlice';
+import {
+  requestPokemons,
+  requestPokemonsSuccess,
+} from '../store/pokemonsSlice';
 import { AppState } from '../store';
 
 function useApiPokemons() {
   // const [loading, setLoading] = useState(false);
   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const dispatch = useDispatch();
-  const pokemons = useSelector<AppState, Pokemon[]>((state) => state.pokemons.data);
-  const loading = useSelector<AppState, boolean>((state) => state.pokemons.loading);
+  const pokemons = useSelector(
+    (state: AppState) => state.pokemons.data
+  );
+  const loading = useSelector(
+    (state: AppState) => state.pokemons.loading
+  );
 
   useEffect(() => {
     // setLoading(true);
@@ -36,19 +43,20 @@ function useApiPokemons() {
 }
 
 function PokemonList() {
-
   const [term, setTerm] = useState('');
-  const { pokemonsIdsToCompare } = useContext(CompareContext);
-  const { pokemons } = useApiPokemons();
+  const pokemonsIdsToCompare = useSelector((state: AppState) => state.compare.pokemonsIdsToCompare);
+  // const { pokemonsIdsToCompare } = useContext(CompareContext);
+  const { pokemons, loading } = useApiPokemons();
 
   // const renderItemMemo = useMemo(() => (pokemon: Pokemon) => (
   //   <PokemonCard key={pokemon.id} pokemon={pokemon} />
   // ), []);
 
   // en raccourci
-  const renderItemMemo = useCallback((pokemon: Pokemon) => (
-    <PokemonCard key={pokemon.id} pokemon={pokemon} />
-  ), []);
+  const renderItemMemo = useCallback(
+    (pokemon: Pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />,
+    []
+  );
 
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login/' }} />;
@@ -60,10 +68,11 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch filter={term} onType={setTerm} />
-          <List
-            items={pokemons}
-            renderItem={renderItemMemo}
-          ></List>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <List items={pokemons} renderItem={renderItemMemo}></List>
+          )}
           {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))} */}

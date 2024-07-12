@@ -4,10 +4,12 @@ import { Pokemon } from '../models/pokemon';
 import { getPokemon } from '../services/pokemon-service';
 import { CompareContext } from '../compare-context';
 import { useNavigate } from 'react-router-dom';
+import { usePokemonsStore } from '../store';
 
 function PokemonCompare() {
   const navigate = useNavigate();
-  const { pokemonsIdsToCompare } = useContext(CompareContext);
+  const pokemonsIdsToCompare = usePokemonsStore((state) => state.pokemonsIdsToCompare);
+  // const { pokemonsIdsToCompare } = useContext(CompareContext);
 
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
   const [pokemon2, setPokemon2] = useState<Pokemon | undefined>();

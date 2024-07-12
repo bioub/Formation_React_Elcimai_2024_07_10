@@ -5,6 +5,9 @@ import { formatDate, formatType } from '../helpers';
 import { MouseEvent, useContext } from 'react';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
+import { AppState } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSelectId } from '../store/compareSlice';
 
 type Props = {
   pokemon: Pokemon;
@@ -12,7 +15,9 @@ type Props = {
 };
 
 function PokemonCard({ pokemon }: Props) {
-  const { pokemonsIdsToCompare, toggleSelectId } = useContext(CompareContext);
+
+  const pokemonsIdsToCompare = useSelector((state: AppState) => state.compare.pokemonsIdsToCompare);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // ABSURDE bloque le thread pendant 200ms (simule
@@ -32,7 +37,7 @@ function PokemonCard({ pokemon }: Props) {
   }
 
   return (
-    <div className={classNames("col s6 m4", {'blue': pokemonsIdsToCompare.includes(pokemon.id!)})} onClick={() => { toggleSelectId(pokemon.id!) }}>
+    <div className={classNames("col s6 m4", {'blue': pokemonsIdsToCompare.includes(pokemon.id!)})} onClick={() => { dispatch(toggleSelectId(pokemon.id!)) }}>
       <div className="card horizontal">
         <div className="card-image">
           <img src={pokemon.picture} alt={pokemon.name} />

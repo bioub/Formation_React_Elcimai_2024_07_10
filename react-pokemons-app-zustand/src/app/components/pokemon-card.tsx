@@ -5,6 +5,7 @@ import { formatDate, formatType } from '../helpers';
 import { MouseEvent, useContext } from 'react';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
+import { usePokemonsStore } from '../store';
 
 type Props = {
   pokemon: Pokemon;
@@ -12,7 +13,11 @@ type Props = {
 };
 
 function PokemonCard({ pokemon }: Props) {
-  const { pokemonsIdsToCompare, toggleSelectId } = useContext(CompareContext);
+
+  const pokemonsIdsToCompare = usePokemonsStore((state) => state.pokemonsIdsToCompare);
+  const toggleSelectId = usePokemonsStore((state) => state.toggleSelectId);
+
+  // const { pokemonsIdsToCompare, toggleSelectId } = useContext(CompareContext);
   const navigate = useNavigate();
 
   // ABSURDE bloque le thread pendant 200ms (simule

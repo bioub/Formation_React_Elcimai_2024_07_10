@@ -8,16 +8,19 @@ import { isAuthenticated } from '../services/authentication-service';
 import List from '../components/list';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
+import { usePokemonsStore } from '../store';
 
 function useApiPokemons() {
-  const [loading, setLoading] = useState(false);
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const loading = usePokemonsStore((state) => state.loading);
+  const pokemons = usePokemonsStore((state) => state.pokemons);
+  const requestPokemons = usePokemonsStore((state) => state.requestPokemons);
+  const requestPokemonsSuccess = usePokemonsStore((state) => state.requestPokemonsSuccess);
+
 
   useEffect(() => {
-    setLoading(true);
+    requestPokemons();
     getPokemons().then((pokemons) => {
-      setPokemons(pokemons);
-      setLoading(false);
+      requestPokemonsSuccess(pokemons);
     });
   }, []);
 
@@ -30,7 +33,7 @@ function useApiPokemons() {
 function PokemonList() {
 
   const [term, setTerm] = useState('');
-  const { pokemonsIdsToCompare } = useContext(CompareContext);
+  const pokemonsIdsToCompare = usePokemonsStore((state) => state.pokemonsIdsToCompare);
   const { pokemons } = useApiPokemons();
 
   // const renderItemMemo = useMemo(() => (pokemon: Pokemon) => (
