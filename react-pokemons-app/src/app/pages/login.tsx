@@ -1,4 +1,4 @@
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { login } from '../services/authentication-service';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

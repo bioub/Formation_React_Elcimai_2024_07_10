@@ -38,7 +38,8 @@ function PokemonCompare() {
   }, []);
 
   if (pokemonsIdsToCompare.length < 2) {
-    return navigate('/pokemons')
+    navigate('/pokemons')
+    return null;
   }
 
   return (

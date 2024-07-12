@@ -7,7 +7,7 @@ type CompareContextType = {
 
 export const CompareContext = createContext<CompareContextType>({
   pokemonsIdsToCompare: [],
-  toggleSelectId(id: number) {
+  toggleSelectId(_id: number) {
     throw new Error('Missing CompareContext.Provider');
   },
 });

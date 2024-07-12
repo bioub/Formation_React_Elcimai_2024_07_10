@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
-import { memo, MouseEvent, useContext } from 'react';
+import { MouseEvent, useContext } from 'react';
 import { CompareContext } from '../compare-context';
 import classNames from 'classnames';
 

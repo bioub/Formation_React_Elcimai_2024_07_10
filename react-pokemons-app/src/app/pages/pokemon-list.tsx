@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, memo, useMemo, useCallback } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { Pokemon } from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
 import { getPokemons } from '../services/pokemon-service';
@@ -31,7 +31,7 @@ function PokemonList() {
 
   const [term, setTerm] = useState('');
   const { pokemonsIdsToCompare } = useContext(CompareContext);
-  const { pokemons, loading } = useApiPokemons();
+  const { pokemons } = useApiPokemons();
 
   // const renderItemMemo = useMemo(() => (pokemon: Pokemon) => (
   //   <PokemonCard key={pokemon.id} pokemon={pokemon} />
