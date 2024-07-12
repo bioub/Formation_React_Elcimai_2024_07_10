@@ -1,0 +1,12 @@
+{
+  "🔐 Identifiant ou mot de passe incorrect": "Mauvais login mot de passe",
+  "🔐 Identifiant ou mot de passe incorrect.": "Mauvais login ou mot de passe",
+  "pokemonCardDetails": {
+    "back": "",
+    "createdAt": "",
+    "damage": "",
+    "healthpoints": "Points de vie",
+    "name": "Nom",
+    "types": ""
+  }
+}

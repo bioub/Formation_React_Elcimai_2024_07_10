@@ -6,6 +6,6 @@ export function newTodoSelector(state) {
   return state.newTodo;
 }
 
-export function todosCompletedNumberSelector(state) {
-  return state.todos.filter(t => t.completed).length;
+export function todosNotCompletedNumberSelector(state) {
+  return state.todos.filter(t => !t.completed).length;
 }

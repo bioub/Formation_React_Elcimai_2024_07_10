@@ -13,6 +13,15 @@
 		},
 		{
 			"path": "exercices-optimisation"
+		},
+		{
+			"path": "demos-redux"
+		},
+		{
+			"path": "react-pokemons-app-redux"
+		},
+		{
+			"path": "react-pokemons-app-zustand"
 		}
 	],
 	"settings": {}

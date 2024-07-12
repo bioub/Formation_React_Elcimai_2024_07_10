@@ -1,0 +1,10 @@
+{
+  "login": {
+    "messages": {
+      "loading": "",
+      "wrongCredentials": "Mauvais login ou mot de passe"
+    },
+    "username": "Utilisateur"
+  },
+  "Pokédex": ""
+}

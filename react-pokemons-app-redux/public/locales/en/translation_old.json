@@ -1,0 +1,11 @@
+{
+  "🔐 Identifiant ou mot de passe incorrect": "Wrong username / password",
+  "pokemonCardDetails": {
+    "back": "",
+    "createdAt": "",
+    "damage": "",
+    "healthpoints": "",
+    "name": "",
+    "types": ""
+  }
+}
