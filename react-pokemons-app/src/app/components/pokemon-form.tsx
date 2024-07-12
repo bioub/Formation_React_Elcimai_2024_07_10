@@ -87,6 +87,8 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
   }
 
   function validateForm() {
+
+
     let newForm: Form = form;
 
     // Validator url
@@ -196,15 +198,20 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const isFormValid = validateForm();
-    if (isFormValid) {
-      pokemon.picture = form.picture.value;
-      pokemon.name = form.name.value;
-      pokemon.hp = form.hp.value;
-      pokemon.cp = form.cp.value;
-      pokemon.types = form.types.value;
-      isEditForm ? handleUpdatePokemon() : handleAddPokemon();
-    }
+    import('../lib').then(({ calledOnFormSubmit }) => {
+      calledOnFormSubmit();
+      const isFormValid = validateForm();
+      if (isFormValid) {
+        pokemon.picture = form.picture.value;
+        pokemon.name = form.name.value;
+        pokemon.hp = form.hp.value;
+        pokemon.cp = form.cp.value;
+        pokemon.types = form.types.value;
+        isEditForm ? handleUpdatePokemon() : handleAddPokemon();
+      }
+    })
+
+    
   }
 
   function isAddForm(): boolean {

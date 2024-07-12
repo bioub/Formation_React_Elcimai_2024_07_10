@@ -19,8 +19,8 @@ function PokemonCard({ pokemon }: Props) {
   // un traitement synchrone très long)
   // si vraiment pas possible de faire autrement
   // -> Web Worker
-  const debut = Date.now();
-  while (debut + 200 > Date.now());
+  // const debut = Date.now();
+  // while (debut + 200 > Date.now());
 
   function goToPokemon(id: number) {
     navigate(`/pokemons/${id}`);

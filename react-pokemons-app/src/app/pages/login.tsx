@@ -14,6 +14,7 @@ type Form = {
   password: Field;
 };
 
+// Pour i18n-parser (clés dynamiques) : 
 // t('login.messages.wrongCredentials')
 // t('login.messages.loading')
 

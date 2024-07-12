@@ -10,6 +10,9 @@
 		},
 		{
 			"path": "react-communication"
+		},
+		{
+			"path": "exercices-optimisation"
 		}
 	],
 	"settings": {}

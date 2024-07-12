@@ -43,7 +43,7 @@ function PokemonList() {
   ), []);
 
   if (!isAuthenticated) {
-    return <Navigate to={{ pathname: '/login' }} />;
+    return <Navigate to={{ pathname: '/login/' }} />;
   }
 
   return (

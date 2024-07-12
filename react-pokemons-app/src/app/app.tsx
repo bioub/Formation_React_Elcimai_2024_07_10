@@ -2,14 +2,16 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import PokemonsList from './pages/pokemon-list';
 import PokemonsDetail from './pages/pokemon-detail';
 import PokemonEdit from './pages/pokemon-edit';
-import PokemonAdd from './pages/pokemon-add';
+// import PokemonAdd from './pages/pokemon-add';
 import PageNotFound from './pages/page-not-found';
 import Login from './pages/login';
 import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
 import { useTranslation } from 'react-i18next';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { CompareProvider } from './compare-context';
+
+const PokemonAdd = lazy(() => import('./pages/pokemon-add'));
 
 function App() {
   const { t, i18n } = useTranslation();
