@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
+    "redux": "^5.0.1"
+  }
+}
