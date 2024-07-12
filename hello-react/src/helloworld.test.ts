@@ -1,6 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { formatType, helloworld } from './helloworld';
 
+test('helloworld function can be called without error', () => {
+  helloworld('Romain')
+});
+
 test('helloworld function returns hello followed by name', () => {
   expect(helloworld('Romain')).toBe('Hello Romain !');
 });
